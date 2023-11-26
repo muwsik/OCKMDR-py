@@ -63,9 +63,7 @@ class OneClassKMDR:
 
         # training, random subsamples
         for i in range(0, self._nrs):
-            #tempIndex = np.random.choice(n_objects, self._srs, replace = False)
-            tempIndex = np.array([832,924,130,929,643,100,283,554,969,976,160,980,965,489,806,143,424,919,794,961,656,36,848,932,677,754,739,390,651,170,699,32,274,46,96,812,684,312,934,34,430,374,749,777,183,478,435,629,690,733,268,659,635,158,115,481,926,328,564,216,722,245,485,670,852,917,523,133,1005,959,799,242,772,231,880,331,186,237,581,446,945,781,549,516,859,970,708,704,355,529,71,51,493,723,865,121,526,434,11,311])
-            tempIndex = tempIndex - 1
+            tempIndex = np.random.choice(n_objects, self._srs, replace = False)            
             tempData = _data[tempIndex, :]
         
             tempModel = svm \
