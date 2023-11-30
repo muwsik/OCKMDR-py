@@ -2,6 +2,7 @@ import os, csv
 import numpy as np
 from sklearn import svm
 import scipy.io as sio
+import multiprocessing
 
 
 # assert(isinteger(expertY) && isinteger(classifierY))
@@ -101,7 +102,7 @@ class OneClassKMDR:
 
 
     def predict(self, _data):
-        n_objects = _data.shape[0]
+        n_objects = len(_data)
         labels = np.zeros(n_objects, dtype=int)
         scores = np.zeros(n_objects, dtype=float)
 
