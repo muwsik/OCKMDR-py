@@ -54,11 +54,12 @@ def rbf_kernal(_obj1, _obj2, _gamma):
 
 
 class OneClassKMDR:
-    def __init__(self, nrs, srs, nu, gamma):
+    def __init__(self, nrs, srs, nu, gamma, random_state = None):
         self._nrs = nrs
         self._srs = srs
         self._nu = nu
         self._gamma = gamma
+        self._random_state = random_state
 
 
     def fit(self, _data):
@@ -68,9 +69,12 @@ class OneClassKMDR:
         self.sv_coef = np.zeros(n_objects)
         self.submodels = []
 
+        # creating a unique generator
+        rng = np.random.default_rng(self._random_state)
+
         # training, random subsamples
         for i in range(0, self._nrs):
-            tempIndex = np.random.choice(n_objects, self._srs, replace = False)            
+            tempIndex = rng.choice(n_objects, self._srs, replace = False)            
             tempData = _data[tempIndex, :]
         
             tempModel = svm \

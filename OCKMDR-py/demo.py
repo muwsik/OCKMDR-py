@@ -9,7 +9,7 @@ import scipy.io as sio
 
 
 # Parameters
-gamma = 0.01
+gamma = 0.1
 
 
 
@@ -62,11 +62,11 @@ print("AUC (scores): ", round(roc_auc_score(y_test, p_scores), 4))
 
 
 ### KMDR solution
-nrs = 10; srs = 100
+nrs = 5; srs = 100
 print(f"\nKMRD params: -nrs {nrs} -srs {srs}")
 
 start_time = time.time()
-algoKMDR = OneClassKMDR(nu=nu, gamma=gamma, nrs=nrs, srs=srs)
+algoKMDR = OneClassKMDR(nu=nu, gamma=gamma, nrs=nrs, srs=srs, random_state=123456)
 modelKMDR = algoKMDR.fit(x_train)
 end_time = time.time()
 
