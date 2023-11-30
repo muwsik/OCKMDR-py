@@ -11,15 +11,22 @@ def quality(expertY, classifierY):
     FN = np.sum((expertY ==  1) == -classifierY)
     FP = np.sum((expertY == -1) ==  classifierY)
 
-    P_Recall = TP/(TP+FN)
-    P_Precision = TP/(TP+FP)
-    P_Fmeasure = round(2 * P_Precision * P_Recall / (P_Precision + P_Recall), 5)
+    if (TP + FN != 0):
+        Recall = TP / (TP + FN)
+    else:
+        Recall = 0
 
-    N_Recall = TN/(TN+FP)
-    N_Precision = TN/(TN+FN)
-    N_Fmeasure = round(2 * N_Precision * N_Recall / (N_Precision + N_Recall), 5)
+    if (TP + FP != 0):
+        Precision = TP / (TP + FP)
+    else:
+        Precision = 0
+    
+    if (Precision + Recall != 0):
+        Fmeasure = round(2 * Precision * Recall / (Precision + Recall), 5)
+    else:
+        Fmeasure = 0
 
-    return {"TP":TP, "TN":TN, "FP":FP, "FN":FN, "P_Fmeasure":P_Fmeasure, "N_Fmeasure":N_Fmeasure}
+    return {"TP":TP, "TN":TN, "FP":FP, "FN":FN, "Fmeasure":Fmeasure}
 
 
 # 

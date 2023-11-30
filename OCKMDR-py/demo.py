@@ -7,12 +7,9 @@ from sklearn.metrics import roc_auc_score
 from sklearn import svm
 import scipy.io as sio
 
-import warnings
-warnings.filterwarnings('ignore')
-
 
 # Parameters
-gamma = 0.1
+gamma = 0.01
 
 
 
@@ -33,8 +30,8 @@ gamma = 0.1
 
 
 ### Loading from a file *.mat
-train_path = r"..\test-data\OCmodel003_data.mat"
-test_path = r"..\test-data\OCmodel004_data.mat"
+train_path = r"..\test-data\OCmodel007_data.mat"
+test_path = r"..\test-data\OCmodel008_data.mat"
 
 ## Training data
 y_train, x_train = read_data_mat(train_path, "X", "Y")
@@ -58,7 +55,8 @@ print(f"Elapsed time: {end_time - start_time:.4f} sec")
 
 p_label = modelSVM.predict(x_test)
 p_scores = modelSVM.score_samples(x_test)
-print(quality(y_test, np.array(p_label)))
+print("+1: ", quality(y_test, p_label))
+print("-1: ", quality(-y_test, -p_label))
 print("AUC (labels): ", round(roc_auc_score(y_test, p_label), 4))
 print("AUC (scores): ", round(roc_auc_score(y_test, p_scores), 4))
 
@@ -75,6 +73,7 @@ end_time = time.time()
 print(f"Elapsed time: {end_time - start_time:.4f} sec")
 
 p_label, p_scores = modelKMDR.predict(x_test)
-print(quality(y_test, np.array(p_label)))
+print("+1: ", quality(y_test, p_label))
+print("-1: ", quality(-y_test, -p_label))
 print("AUC (labels): ", round(roc_auc_score(y_test, p_label), 4))
 print("AUC (scores): ", round(roc_auc_score(y_test, p_scores), 4))
